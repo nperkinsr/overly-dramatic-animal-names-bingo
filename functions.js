@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", () => {
     "fifth-column": columnO,
   };
 
-  // Randomise Button: It updates bingo card values from the respective arrays (there's five)
+  // Randomise Button: Updates bingo card values from the respective arrays
   document.querySelector(".randomise").addEventListener("click", () => {
     Object.keys(columns).forEach((columnClass) => {
       const columnElements = document.querySelectorAll(`.${columnClass}`);
@@ -27,137 +27,67 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // Clear Button: unchecks all checkboxes on the bingo card
+  // Clear Button: Unchecks all checkboxes on the bingo card
   document.querySelector(".clear").addEventListener("click", () => {
     document.querySelectorAll(".checkbox-wrapper input").forEach((checkbox) => {
       checkbox.checked = false;
     });
   });
 
-  // Called words list is shown inside the textarea (which should have been a div)
+  // Called words list
   const calledWordsList = document.querySelector(".called-words-list");
+  const latestCalledWord = document.querySelector(".latest-called-word");
   let calledWords = [];
   const allWords = [...columnB, ...columnI, ...columnN, ...columnG, ...columnO];
 
   // Updates the textarea with the list of called words (newest on top)
   function updateCalledWordsDisplay() {
-    calledWordsList.value = calledWords.join("\n"); // Space
-  }
-
-  // Picks a new word and updates the list
-  function callNewWord() {
-    if (calledWords.length === allWords.length) {
-      stopAutoPlay();
-      return;
-    }
-    let newWord;
-    do {
-      newWord = allWords[Math.floor(Math.random() * allWords.length)];
-    } while (calledWords.includes(newWord));
-    calledWords.unshift(newWord); // adds new word at the top
-    updateCalledWordsDisplay();
-    updateCounters(); // Update the counters
+    calledWordsList.value = calledWords.join("\n");
   }
 
   // Updates the counter values
   function updateCounters() {
-    const playedItems = document.querySelector(".played-items");
-    const totalItems = document.querySelector(".total-items");
-    playedItems.textContent = calledWords.length; // Update played items
-    totalItems.textContent = allWords.length; // Update total items
+    document.querySelector(".played-items").textContent = calledWords.length;
+    document.querySelector(".total-items").textContent = allWords.length;
   }
 
-  // Manual Play Button: calls a new word on each click
+  // Picks a new word and updates the list
+  function callNewWord() {
+    if (calledWords.length === allWords.length) return;
+
+    let newWord;
+    do {
+      newWord = allWords[Math.floor(Math.random() * allWords.length)];
+    } while (calledWords.includes(newWord));
+
+    calledWords.unshift(newWord); // Add new word at the top
+    updateCalledWordsDisplay();
+    updateCounters();
+
+    // Update and show the latest called word
+    latestCalledWord.textContent = newWord;
+    latestCalledWord.classList.remove("hidden");
+  }
+
+  // Manual Play Button: Calls a new word on each click
   document.querySelector(".manual-call").addEventListener("click", () => {
     callNewWord();
   });
 
-  // Auto Play
-  // When the Auto Play button is clicked, a new word is added immediately
-  // and then every 8 seconds thereafter until all words are used...
-  let autoPlayInterval = null;
-  const autoPlayButton = document.querySelector(".auto-play");
-
-  autoPlayButton.addEventListener("click", () => {
-    if (autoPlayInterval === null) {
-      // Start auto play
-      callNewWord(); // Call a word immediately
-      autoPlayButton.style.backgroundColor = "#ffe014"; // Change button to pink
-      autoPlayButton.style.color = "#2c2c2c"; // Change text to black-ish
-
-      autoPlayInterval = setInterval(() => {
-        callNewWord();
-        if (calledWords.length === allWords.length) {
-          stopAutoPlay();
-        }
-      }, 8000);
-    } else {
-      // Stop auto play
-      stopAutoPlay();
-    }
-  });
-
-  // Function to stop auto play (also used when the game is reset)
-  function stopAutoPlay() {
-    if (autoPlayInterval !== null) {
-      clearInterval(autoPlayInterval);
-      autoPlayInterval = null;
-    }
-    autoPlayButton.style.backgroundColor = ""; // Reset button color
-    autoPlayButton.style.color = ""; // Change text to black-ish
-  }
-
-  // Pause Button
-  // Clicking the Pause button toggles between pausing and resuming auto play
-  // When paused, the button's background becomes pink
-  let isPaused = false;
-  const pauseButton = document.querySelector(".pause");
-  pauseButton.addEventListener("click", () => {
-    if (autoPlayInterval !== null) {
-      // Pause auto play
-      clearInterval(autoPlayInterval);
-      autoPlayInterval = null;
-      isPaused = true;
-      pauseButton.style.backgroundColor = "#ffe014";
-      pauseButton.style.color = "#2c2c2c"; // Change text to black-ish
-      pauseButton.innerHTML = '<i class="bi bi-pause-fill"></i>'; // Change text to bootstrap icon
-    } else if (isPaused) {
-      // Resume auto play
-      isPaused = false;
-      pauseButton.style.backgroundColor = "";
-      pauseButton.textContent = "Pause"; // Change back to text
-      pauseButton.style.color = "";
-      if (calledWords.length < allWords.length) {
-        autoPlayInterval = setInterval(() => {
-          callNewWord();
-          if (calledWords.length === allWords.length) {
-            stopAutoPlay();
-          }
-        }, 8000);
-      }
-    }
-  });
-
-  // Reset Button
   // Reset Button: Clears the called words and resets the game
   document.querySelector(".reset").addEventListener("click", () => {
     calledWords = []; // Clear the array
-    updateCalledWordsDisplay(); // Update the display
-
-    stopAutoPlay(); // Stop auto-play if running
-
-    // Reset pause button state
-    isPaused = false;
-    pauseButton.style.backgroundColor = "";
-    pauseButton.textContent = "Pause";
-
-    // Reset counters
+    updateCalledWordsDisplay();
     updateCounters();
+
+    // Hide and reset the latest called word
+    latestCalledWord.classList.add("hidden");
+    latestCalledWord.textContent = "Get ready!";
   });
 
   // Returns a randomized subset of the given array
   function getRandomValues(array, count) {
-    const shuffled = [...array].sort(() => 0.5 - Math.random()); // The spread operator (...) is used to copy all the items in array to a new array called shuffled. This way, we don’t change the original array
+    const shuffled = [...array].sort(() => 0.5 - Math.random());
     return shuffled.slice(0, count);
   }
 });

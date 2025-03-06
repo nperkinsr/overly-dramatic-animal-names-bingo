@@ -3,7 +3,6 @@ const columnB = [
   "Agonized Anteater",
   "Abandoned Armadillo",
   "Anguished Alpaca",
-  "Broken-hearted Baboon",
   "Betrayed Badger",
   "Bitter Bison",
   "Crestfallen Cheetah",

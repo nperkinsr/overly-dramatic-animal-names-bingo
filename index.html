@@ -197,21 +197,16 @@
 
     <section class="host-controls">
       <h2>Host Module</h2>
-      <p><b>Manual Play.</b> Click to call a new item.</p>
-      <p><b>Auto Play.</b> Calls new item automatically every 8 seconds.</p>
-      <p><b>Pause.</b> Stops Auto Play.</p>
-      <p><b>Reset.</b> Clears all the called items from list to start a new game.</p>
-
+      <p><b>Play.</b> Click once to call a new item.</p>
+      <p><b>Reset.</b> Clears all the called items from the list to start a new game.</p>
 
 
       <div class="host-buttons">
-        <button class="card-button manual-call">Manual play</button>
-        <div class="autoplay-buttons">
-          <button class="card-button-half auto-play">Auto play</button>
-          <button class="card-button-half pause">Pause</button>
-        </div>
+        <button class="card-button manual-call">Play</button>
         <button class="card-button reset">Reset</button>
       </div>
+
+      <div class="latest-called-word hidden">Get ready!</div>
 
       <textarea class="called-words-list" placeholder="Called items will appear here" readonly></textarea>
 
