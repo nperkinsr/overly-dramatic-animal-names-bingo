@@ -33,10 +33,10 @@ body::before {
 }
 
 .container {
-  margin-top: 3rem;
+  margin-top: 1rem;
   display: flex;
   flex-direction: row;
-  height: 830px;
+  height: 770px;
   gap: 1rem;
 }
 
@@ -107,6 +107,10 @@ body::before {
   margin: 0.5rem 0;
 }
 
+.reset {
+  margin-top: 2rem;
+}
+
 .randomise {
   margin-bottom: 1rem;
 }
@@ -141,7 +145,7 @@ body > div.container > section.host-controls > h2 {
   font-family: "Quicksand", sans-serif;
   font-size: 1rem;
   width: 80%;
-  height: 360px;
+  height: 15rem;
   resize: none;
   text-align: center;
   display: flex;
@@ -181,13 +185,14 @@ body > div.container > section.host-controls > h2 {
   flex-direction: column;
   align-items: center;
   background-color: var(--white);
-  width: 650px;
+  width: 640px;
   border-radius: 5px;
   height: 100%;
 }
 
 .bingo-container h1 {
   font-size: 2rem;
+  font-weight: 900;
   margin-bottom: 0;
   color: var(--color3);
 }
@@ -195,10 +200,9 @@ body > div.container > section.host-controls > h2 {
 .bingo-card {
   display: grid;
   grid-template-columns: repeat(5, 100px);
-  grid-template-rows: repeat(6, 100px);
+  grid-template-rows: 70px 100px 100px 100px 100px 100px;
   gap: 1rem;
   justify-content: center;
-  margin-top: 1rem;
 }
 
 .bingo-cell {
@@ -212,8 +216,9 @@ body > div.container > section.host-controls > h2 {
 
 .letter {
   border: none;
-  font-size: 5rem;
+  font-size: 4rem;
   margin: auto;
+  padding-top: 0.5rem;
 }
 
 .checkbox-wrapper {
@@ -221,8 +226,8 @@ body > div.container > section.host-controls > h2 {
   position: relative;
   cursor: pointer;
   margin-bottom: 50px;
-  width: 110px;
-  height: 110px;
+  width: 100px;
+  height: 100px;
 }
 
 .checkbox-wrapper input {
@@ -242,7 +247,7 @@ body > div.container > section.host-controls > h2 {
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 2.2rem;
+  font-size: 2rem;
   color: #000;
   text-align: center;
 }
@@ -279,7 +284,7 @@ body > div.container > section.host-controls > h2 {
   position: absolute;
   width: 100%;
   height: 100%;
-  font-size: 1rem;
+  font-size: 0.9rem;
   color: var(--black);
   display: flex;
   justify-content: center;
@@ -336,7 +341,7 @@ body > div.container > section.host-controls > h2 {
   text-align: center;
   color: var(--color1);
   font-weight: 900;
-  font-size: 1.2rem;
+  font-size: 1rem;
   border-radius: 5px;
 }
 
