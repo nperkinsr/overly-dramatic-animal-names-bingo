@@ -28,7 +28,7 @@ const columnI = [
   "Frustrated Frog",
   "Grieving Gecko",
   "Gloomy Goat",
-  "Guilty Gopher",
+  "Guarded Gnu",
   "Heartbroken Hedgehog",
   "Hopeless Hyena",
   "Hesitant Hamster",
